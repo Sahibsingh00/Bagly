@@ -1,0 +1,51 @@
+//Add font family 
+
+@font-face{
+    font-family: "Poppins-Regular";
+    src: url('./../assets/fonts/Poppins-Regular.ttf');
+}
+@font-face{
+    font-family: "Poppins-Medium";
+    src: url('/assets/fonts/Poppins-Medium.ttf');
+}
+
+@font-face{
+    font-family: "Poppins-SemiBold";
+    src: url('/assets/fonts/Poppins-SemiBold.ttf');
+}
+
+
+// Fonts Family
+$fontRegular : "Poppins-Regular";
+$fontMedium : "Poppins-Medium";
+$fontBold : "Poppins-SemiBold";
+
+// Fonts Size
+$font-10 : 10px;
+$font-12 : 12px;
+$font-13 : 13px;
+$font-14 : 14px;
+$font-15 : 15px;
+$font-16 : 16px;
+$font-18 : 18px;
+$font-20 : 20px;
+$font-22 : 22px;
+$font-24 : 24px;
+$font-26 : 26px;
+$font-28 : 28px;
+$font-30 : 30px;
+$font-32 : 32px;
+$font-34 : 34px;
+$font-36 : 36px;
+$font-45 : 45px;
+$font-60 : 60px;
+$font-66 : 66px;
+
+
+// Fonts Colors
+$fontcolor : #707070;
+$menucolor : #2A2A2A;
+$light : #EBEBEB;
+$darkcolor : #000;
+$light-1 : #D8D8D8;
+$white : #fff;

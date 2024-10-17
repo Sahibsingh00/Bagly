@@ -1,0 +1,16 @@
+<div class="model-slider pt-5">
+    <div class="fc-left-section">
+        <div class="fc-scopri">
+            <h4>Scopri la nuova collezione!</h4>
+            <div class="text-center mt-4"><button [routerLink]="['/shop']">SCOPRI ORA</button></div>
+        </div>
+    </div>
+    <div class="fc-right-section">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let slide of models; let index=index" class="slide">
+                <img [src]="slide.post_image" alt="image slide" style="display: block; width: 100%;">
+            </div>
+        </ngx-slick-carousel>
+    </div>
+    <div class="clear"></div>
+</div>

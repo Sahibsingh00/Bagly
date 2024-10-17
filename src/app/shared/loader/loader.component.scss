@@ -1,0 +1,169 @@
+
+
+.preloader {
+	display: block;
+	position: relative;
+	width: 16px;
+	height: 6px;
+	margin: 10px auto;
+	background: #212121;
+	animation-name: loader;
+	animation-duration: 2s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: infinite;
+	animation-fill-mode: forwards;
+
+
+	&::before,
+	&::after {
+		content: '';
+
+		position: absolute;
+
+		top: 50%;
+
+		width: 100%;
+		height: 100%;
+
+		box-sizing: border-box;
+
+		background: #212121;
+
+		animation-duration: 2s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: infinite;
+		animation-fill-mode: forwards;
+	}
+
+	&::before {
+		left: 0;
+
+		translate: -100% -50%;
+
+		border-right-color: transparent;
+
+		animation-name: loader-left;
+	}
+
+	&::after {
+		right: 0;
+
+		translate: 100% -50%;
+
+		border-left-color: transparent;
+
+		animation-name: loader-right;
+	}
+}
+
+@keyframes loader {
+	0%, 10% {
+		scale: 1;
+	}
+	15% {
+		scale: 0.7 1.2;
+	}
+	40%, 60% {
+		scale: 1;
+	}
+	65%{
+		scale: 0.7 1.2;
+	}
+	100% {
+		scale: 1;
+	}
+}
+
+@keyframes loader-left {
+	0% {
+		translate: -400% -50%;
+		scale: 1.3 0.6;
+	}
+	10%, 60% {
+		translate: -100% -50%;
+		scale: 1;
+	}
+	65%, 85% {
+		translate: -300% -50%;
+	}
+	87.5% {
+		translate: -310% -50%;
+	}
+	90% {
+		translate: -290% -50%;
+	}
+	92.5% {
+		translate: -310% -50%;
+		scale: 1;
+	}
+	95% {
+		translate: -290% -50%;
+	}
+	100% {
+		translate: -400% -50%;
+	}
+}
+
+@keyframes loader-right {
+	0%, 10% {
+		translate: 100% -50%;
+		scale: 1;
+	}
+	15%, 35% {
+		translate: 300% -50%;
+	}
+	15% {
+		scale: 1.3 0.6;
+	}
+	20% {
+		scale: 1;
+	}
+	37.5% {
+		translate: 310% -50%;
+	}
+	40% {
+		translate: 290% -50%;
+	}
+	42.5% {
+		translate: 310% -50%;
+	}
+	45% {
+		translate: 290% -50%;
+		scale: 1;
+	}
+	50% {
+		translate: 400% -50%;
+		scale: 1.3 0.6;
+	}
+	60%, 100% {
+		translate: 100% -50%;
+		scale: 1;
+	}
+}
+
+
+.preloaderScreen {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	padding: 20px;
+	box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99999;
+    background: rgba(255, 255, 255, 0.92);
+	@media only screen and (min-width: 900px) {
+		padding: 40px;
+	}
+}
+
+.text {
+	img{
+        max-height: 50px;
+    }
+}

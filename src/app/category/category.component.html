@@ -1,0 +1,115 @@
+
+<section class="latest-product pt-5">
+    <div class="site-container">
+        <div class="fc-title">
+            <h3 class="mb-3">I NOSTRI PRODOTTI</h3>
+            <p>Design classico, materiali di altissima qualità, dettagli luminosi con Bagly sarà come indossare un
+                gioiello esclusivo nella vita di tutti i giorni. Lasciati avvolgere dai nuovi colori e design in un
+                viaggio di esperienze travolgenti tra pelle e accessori che, con il lavoro dei nostri migliori designer
+                e artigiani, renderanno unico anche l'outfit più semplice.</p>
+        </div>
+        <div class="fc-sortby mb-5 pb-3 d-flex gap-4 align-items-center pt-4">
+            <label>Ordina per: </label>
+            <select name="orderby" (change)="selectSorting($event)" class="orderby form-select form-select-md"
+                aria-label="Ordine negozio">
+                <option value="popularity" selected="selected">Popolarità</option>
+                <option value="newest">Ordina in base al più recente</option>
+                <option value="price_low_to_high">Prezzo: dal più economico</option>
+                <option value="price_high_to_low">Prezzo: dal più caro</option>
+            </select>
+        </div>
+        <div class="fc-product-loop row">
+            <div class="fc-variations col-md-2">
+                <div>
+                    <h6>Seleziona Colore</h6>
+                    <div class="form-check" *ngFor="let color of allPaColor">
+                        <input [checked]="colorName === color.slug" class="form-check-input" type="checkbox"
+                            id="color-{{color.slug}}" name="color" [value]="color.slug" (click)="colorFilter(color);">
+                        <label for="color-{{color.slug}}" class="form-check-label">{{color.name}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-5" *ngFor="let items of products; ; let i = index">
+                        <div class="product-content">
+                            <div class="product-img">
+                                  <a *ngIf="items.variations; else simpleproduuct" routerLink="/product/{{items.slug}}">
+                                    <img [src]="getImageSrc(items)">
+                                  </a>
+                                  <ng-template #simpleproduuct>
+                                    <a routerLink="/product/{{items.slug}}">
+                                      <img [src]="items.thumbnail || 'myImgUrl'">
+                                    </a>
+                                  </ng-template>
+
+                            </div>
+                            <div class="product-detail pt-1 d-flex justify-content-between">
+                                <div class="product-price">
+
+                                    <div class="product-price">
+                                        <span *ngIf="items.variations; else singlePrice">
+                                            <span [innerHTML]="items.price_html"></span>
+                                        </span>
+                                        <ng-template #singlePrice>
+                                            <div class="" *ngIf="items.sale_price; else regularPrice">
+                                                <h6 class="d-flex gap-2">
+                                                    <del class="text-danger">€{{items.regular_price}}</del>
+                                                    <span>€{{items.sale_price}}</span>
+                                                </h6>
+                                            </div>
+        
+                                            <ng-template #regularPrice>
+                                                <h6>€ {{items.regular_price}}</h6>
+                                            </ng-template>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <ul class="colorVariation" *ngIf="items.variations">
+                                    <li *ngFor="let option of getColorOption(items.variations)"
+                                        (click)="selectVariations(items, option)">
+                                      <label [ngClass]="'color-' + normalizeOption(option)" class="color-swatch"> {{option}} </label>
+                                    </li>
+                                  </ul>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="product-name">
+                                    <h6 class="m-0">{{ (items.name.length>25)? (items.name |
+                                        slice:0:25)+'..':(items.name) }}
+                                    </h6>
+                                </div>
+                                <div class="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 pb-5 text-center"><button class="loadMoreBtn" *ngIf="page > 0" (click)="loadMore()">Mostra di piu </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <nav class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of generatePagesArray(totalPages)" [class.active]="page === currentPage">
+        <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav> -->

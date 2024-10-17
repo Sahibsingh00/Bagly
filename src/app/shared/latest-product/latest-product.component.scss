@@ -1,0 +1,48 @@
+.latest-product{
+    padding-bottom: 60px !important;
+    .product-content{
+        .product-img{
+            overflow: hidden;
+            position: relative;
+            img{
+                transition: transform 0.2s linear;
+                width: 100%;
+            }
+            img:hover{
+                transform: scale(1.1, 1.1);
+            }
+        }
+    }
+}
+
+.text-loading {
+    padding: 50px;
+    font-size: 18px;
+    color: #555;
+  }
+
+
+.colorVariation{
+    gap: 7px;
+    margin-bottom: 0px;
+    li{
+        label{
+            width: 25px;
+            padding: 0px;
+            height: 25px;
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 640px) {
+    .latest-product{
+            padding-top: 30px !important;
+            padding-bottom: 5px !important;
+    h2{
+                font-size: 30px !important;
+            }
+        }
+        
+    }

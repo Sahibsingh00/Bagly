@@ -1,0 +1,42 @@
+<section class="sign-in mt-5">
+    <div class="auth-container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="/assets/images/signup-image.jpg" alt="sing up image"></figure>
+            </div>
+            <div class="signin-form  mx-5">
+                <h4 class="form-title pt-5 mb-4">Accedi</h4>
+                <form class="register-form" [formGroup]="loginform" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <label class="pb-2" for="first_name">Indirizzo email *</label>
+                            <input type="email" formControlName="username" class="form-control">
+                                <div *ngIf="submitted && f['username'].errors" class="invalid-field">
+                                    <div *ngIf="f['username'].errors['required']">L'email è richiesta</div>
+                                    <div *ngIf="f['username'].errors['email']">Inserisci un indirizzo e-mail valido.</div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <label class="pb-2" for="first_name">Password</label>
+                            <input type="password" formControlName="password" 
+                                class="form-control">
+                            <div *ngIf="submitted && f['password'].errors" class="invalid-field">
+                                <div *ngIf="f['password'].errors['required']">La password è richiesta</div>
+                                </div>
+                        </div> 
+                    </div>
+         
+                    <div class="form-group form-button">
+                        <button type="submit" class="tfc-btn"  [innerText]="btnloading ? 'Loading...' : 'Accedi'"></button>
+                    </div>
+                <p class="text-center mt-3"><a [routerLink]="['/signup']" class="signup-image-link" >Registrati ora!</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

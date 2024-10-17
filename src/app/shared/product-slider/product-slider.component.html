@@ -1,0 +1,67 @@
+<section class="product-slides ptb-100 ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 ">
+                <h3 class="text-center">Ti Potrebbe Piacere</h3>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col-md-12" *ngIf="product?.length > 0; else noLoading">
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let slide of product; let index=index" class="slide">
+                        <h5 class="pb-2"><a routerLink="/product/{{slide.slug}}" (click)="refresspage()">{{ (slide.name.length>20)? (slide.name
+                                | slice:0:20)+'..':(slide.name) }}</a></h5>
+                        <div class="product-slide-title">
+
+                            <a *ngIf="slide.variations; else simpleproduuct" routerLink="/product/{{slide.slug}}" (click)="refresspage()">
+                                <img [src]="getImageSrc(slide)">
+                              </a>
+                              <ng-template #simpleproduuct>
+                                <a routerLink="/product/{{slide.slug}}" (click)="refresspage()">
+                                  <img [src]="slide?.thumbnail || 'myImgUrl'">
+                                </a>
+                              </ng-template>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="product-price">
+                                <div class="product-price">
+                                    <span *ngIf="slide.variations; else singlePrice">
+                                        <span [innerHTML]="slide.price_html"></span>
+                                    </span>
+                                    <ng-template #singlePrice>
+                                        <div class="" *ngIf="slide.sale_price; else regularPrice">
+                                            <h6 class="d-flex gap-2">
+                                                <del class="text-danger">€{{slide.regular_price}}</del>
+                                                <span>€{{slide.sale_price}}</span>
+                                            </h6>
+                                        </div>
+    
+                                        <ng-template #regularPrice>
+                                            <h6>€ {{slide.regular_price}}</h6>
+                                        </ng-template>
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <ul class="colorVariation" *ngIf="slide.variations">
+                                <li *ngFor="let option of getColorOption(slide.variations)"
+                                [ngClass]="{ 'active': option === activeOption && slide === currentSelectedItems }"
+                                (click)="selectVariation(slide, option)">
+                              <label [ngClass]="'color-' + normalizeOption(option)" class="color-swatch"> {{option}} </label>
+                            </li>
+                              </ul>
+                        </div>
+
+                              
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+            <ng-template #noLoading>
+                <div class="text-center text-loading">
+                    <p>Loading...</p>
+                  </div>
+            </ng-template>
+        </div>
+    </div>
+</section>

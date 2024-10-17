@@ -1,0 +1,131 @@
+<section class="section-content padding-y bg mb-5 pt-5" *ngIf="product">
+    <div class="site-container">
+        <div class="product-main d-flex">
+            <div class="product-image-section">
+                <div class="single_product_slide">
+                    <div class="fc-product-info">
+                        <p class="productbc">
+                            <a [routerLink]="['/']">Home <span>/</span></a>
+                            <a *ngIf="product?.categories">{{product.categories[0]}} <span>/</span></a>
+                            <a class="fw-bold">{{product.name}}</a>
+                        </p>
+                        <p class="fc-search" (click)="popupVisible=true; overFlowHidden()" ><img
+                            src="./../../../assets/images/search.png" alt="search"></p>
+                    </div>
+                    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                        <div ngxSlickItem *ngFor="let picture of GallaryImages; let i = index" class="slide">
+                            <img (click)="select(i)" [src]="picture.url" />
+                        </div>
+                    </ngx-slick-carousel>
+
+                  
+                    <div class="fc-product-popup" *ngIf="popupVisible" (click)="handlePopupClick($event)">
+                        <div class="single_product_Image">
+                            <div class="slide_block_2">
+                                <div class="feature-image">
+                                    <figure class="figure-image">
+                                        <img class="arrow-right" src="./../../../assets/images/right.png" alt="right" (click)="selectArrow()">
+                                        <img class="arrow-right" src="./../../../assets/images/left.png" alt="left" class="arrow-left" (click)="selectLeftArrow()">
+                                        <!-- <lib-ngx-image-zoom #imageZoom [enableScrollZoom]="true" [enableLens]="true" [lensWidth]="150"
+                                            [lensHeight]="150"
+                                            [thumbImage]=GallaryImages[currentPicture].url
+                                            [fullImage]=GallaryImages[currentPicture].url
+                                        ></lib-ngx-image-zoom> -->
+
+                                        <!-- <app-zoomable-image [imageUrl]="'path/to/your/image.jpg'"></app-zoomable-image> -->
+                                        <!-- [imageUrl] -->
+
+                                        <app-zoomable-image [imageUrl]="GallaryImages[currentPicture].url"></app-zoomable-image>
+
+
+                                    </figure>
+                                </div> 
+                                <img class="fc-hide" src="./../../../assets/images/cancel.jpg" alt="hide" (click)="hideZoom()">
+                            </div>
+                            <div class="slide_block_1">
+                                <ul class="thumbnail_img p-0">
+                                    <li class="box box-1" *ngFor="let picture of GallaryImages; let i = index">
+                                        <img (click)="select(i)" [src]="picture.src" />
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>                        
+                    </div>
+                    <div class="fc-info">
+                        <div class="fc-product-title">
+                            <p class="catName">{{ formatCategories(product.categories) }}</p>
+                            <h3>{{ (product.name.length>25)? (product.name | slice:0:25)+'..':(product.name) }}</h3>
+                            <p class="productPrice"  *ngIf="!selectedVariation">€ {{product.price}}</p>
+                            <p class="productPrice"  *ngIf="selectedVariation">€ {{selectedVariation.display_price}}</p>
+                        </div>
+                        <div *ngIf="product" class="show-on-mobile">
+                            <div *ngIf="product.variations">
+                                <h4 class="pb-2">Colore:</h4>
+                                <ul class="colorVariation" #colorVariationList>
+
+                                    <li *ngFor="let option of getColorOption(product.variations); let a = index"
+                                        [ngClass]="{ 'active': option === activeOption }"
+                                        (click)="selectVariation(product.variations[a])">
+                                         <label [ngClass]="'color-' + normalizeOption(option)" class="color-swatch"> {{option}} </label>
+                                    </li>
+
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="fc-cart-button dd">
+                                <button (click)="addProductToCart(product)" class="add_to_cart_btn"  [innerText]="btnloading ? 'Loading...' : 'ACQUISTA ORA'"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content-section">
+                <div class="product-content">
+                    <div class="desc pb-4">
+                        <h4>Descrizione</h4>
+                        <p class="fc-description" [innerHTML]="product.short_description"></p>
+                    </div>
+                    <div *ngIf="product" class="hide-on-mobile dd">
+                        <div *ngIf="product.variations">
+                            <h4 class="pb-1">Colore:</h4>
+                            <ul class="colorVariation" #colorVariationList>
+                                <li *ngFor="let option of getColorOption(product.variations); let a = index" [ngClass]="{ 'active': option === activeOption }" (click)="selectVariation(product.variations[a])">
+                                    <label [ngClass]="'color-' + normalizeOption(option)" class="color-swatch">
+                                        {{option}}
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="p_information" *ngIf="product?.meta_data">
+                        <h4 class="pb-2">Informazioni Prodotto</h4>
+
+                        <div *ngFor="let item of filteredMetaData" class="infoBlocks py-3">
+                            <div class="p_label">
+                                <h6>{{ getKeyLabel(item.key) }}</h6>
+                            </div>
+                            <div class="p_value" [innerHTML]="item.value"></div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-product-slider [product]="productList"></app-product-slider>
+
+
+
+
+
+
+
+
+
+
+
+
+

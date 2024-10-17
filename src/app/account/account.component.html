@@ -1,0 +1,201 @@
+<div class="header-section py-4">
+  <div class="site-container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="m-0 fc-title">Account</h2>
+      </div>
+      <div class="col-md-6">
+        <nav class="theme-breadcrumb">
+          <ol class="breadcrumb mb-0 py-1">
+            <li class="breadcrumb-item">
+              <a href="">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Account</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="site-container pt-5 mt-3 pb-5">
+  <h5 class="pb-2">IL MIO ACCOUNT </h5>
+  <div id="content">
+    <div id="main-content">
+      <mat-tab-group>
+        <mat-tab label="Bacheca">
+          <div class="tabs-inner">
+            <h5>Ciao {{userInfo?.username}} (non sei {{userInfo?.username}}? <a href="#" (click)="logout()">Logout </a> )</h5>
+            <p>
+              Dalla bacheca del tuo account puoi visualizzare i tuoi ordini recenti, gestire i tuoi indirizzi di spedizione e fatturazione e modificare la password e i dettagli dell'account.
+            </p>
+          </div>
+        </mat-tab>
+        <mat-tab label="Ordini">
+          <div class="tabs-inner">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ORDINE</th>
+                  <th scope="col">DATA</th>
+                  <th scope="col">STATO</th>
+                  <th scope="col">TOTALE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let items of orders">
+                  <th scope="row">#{{items.id}}</th>
+                  <td>{{items.date_created}}</td>
+
+                  <td>
+                    <ng-container [ngSwitch]="items.status">
+                      <span *ngSwitchCase="'failed'">Annullato</span>
+                      <span *ngSwitchCase="'pending'">Completamento</span>
+                      <span *ngSwitchCase="'shipped'">Spedito</span>
+                      <span *ngSwitchCase="'processing'">Elaborazione</span>
+                      <span *ngSwitchDefault>{{ items.status }}</span>
+                    </ng-container>
+                  </td>
+
+                  <!-- <td>{{items.status}}</td> -->
+                  <td>€ {{items.total}} per {{items.line_items.length}} articoli</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="Dettagli account">
+          <div class="tabs-inner">
+            <form class="register-form" id="login-form" [formGroup]="signupform" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label for="first_name">Nome</label>
+                  <input type="text" formControlName="firstName" class="form-control">
+                  <div *ngIf="submitted && f['firstName'].errors" class="invalid-field">
+                    <div *ngIf="f['firstName'].errors['required']">Il nome è obbligatorio</div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <label for="first_name">Cognome</label>
+                  <input type="text" formControlName="lastName"  class="form-control">
+                  <div *ngIf="submitted && f['lastName'].errors" class="invalid-field">
+                    <div *ngIf="f['lastName'].errors['required']">Il cognome è obbligatorio</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label for="first_name">Nome utente</label>
+                  <input type="text" formControlName="username"  class="form-control">
+                  <div *ngIf="submitted && f['username']errors" class="invalid-field">
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <label for="first_name">Email</label>
+                  <input type="text" formControlName="email" class="form-control" readonly>
+                  <div *ngIf="submitted && f['email'].errors" class="invalid-field">
+                    <div *ngIf="f['email'].errors['required']">Email obbligatoria</div>
+                    <div *ngIf="f['email'].errors['email']">L'email deve essere un indirizzo email valido</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-button">
+                <button type="submit" name="signin" class="tfc-btn">Aggiornare</button>
+              </div>
+            </form>
+          </div>
+        </mat-tab> -->
+        <mat-tab label="Indirizzi">
+          <form class="needs-validation p-3 " [formGroup]="billingForm" (ngSubmit)="onUpdate()">
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="first_name">Nome</label>
+                <input type="text" formControlName="first_name" class="form-control">
+                <div *ngIf="submitted && f['first_name'].errors" class="invalid-field">
+                  <div *ngIf="f['first_name'].errors['required']">Il nome è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="last_name">Cognome</label>
+                <input type="text" formControlName="last_name" class="form-control" id="last_name">
+                <div *ngIf="submitted && f['last_name'].errors" class="invalid-field">
+                  <div *ngIf="f['last_name'].errors['required']">Il cognome è obbligatorio</div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mb-4">
+              <label for="email">Email</label>
+              <input type="email" formControlName="email" class="form-control" id="email" readonly>
+              <div *ngIf="submitted && f['email'].errors" class="invalid-field">
+                <div *ngIf="f['email'].errors['required']">L'email è obbligatoria</div>
+                <div *ngIf="f['email'].errors['email']">L'email deve essere un indirizzo email valido</div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="email">Telefono </label>
+              <input type="text" formControlName="phone" class="form-control" id="phone">
+              <div *ngIf="submitted && f['phone'].errors" class="invalid-field">
+                <div *ngIf="f['phone'].errors['required']">Il telefono è obbligatorio</div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="address">Indirizzo</label>
+                <input type="text" formControlName="address_1" class="form-control">
+                <div *ngIf="submitted && f['address_1'].errors" class="invalid-field">
+                  <div *ngIf="f['address_1'].errors['required']">L'indirizzo è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="address">Città</label>
+                <input type="text" formControlName="city" class="form-control">
+                <div *ngIf="submitted && f['city'].errors" class="invalid-field">
+                  <div *ngIf="f['city'].errors['required']">La città è obbligatoria</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-4">
+                <label for="country">Paese</label>
+                <select formControlName="country" class="form-control custom-select d-block w-100" (change)="onChangeCountry()">
+                  <option value="">Scegli...</option>
+                  <option *ngFor="let country of countryInfo; let i = index" value="{{country.CountryName}}">{{country.CountryName}}</option>
+                </select>
+                <div *ngIf="submitted && f['country'].errors" class="invalid-field">
+                  <div *ngIf="f['country'].errors['required']">Il Paese è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4"> 
+                <label for="state">Stato</label>
+                <select formControlName="state" class="form-control custom-select d-block w-100">
+                  <option value="">--Seleziona Stato--</option>
+                  <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}</option>
+                </select>
+                <div *ngIf="submitted && f['state'].errors" class="invalid-field">
+                  <div *ngIf="f['state'].errors['required']">Lo stato è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <label for="zip">C.A.P</label>
+                <input type="text" formControlName="postcode" class="form-control">
+                <div *ngIf="submitted && f['postcode'].errors" class="invalid-field">
+                  <div *ngIf="f['postcode'].errors['required']">Il codice postale è obbligatorio</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 mb-2">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="tfc-btn mr-1">Salva Indirizzo</button>
+              </div>
+            </div>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

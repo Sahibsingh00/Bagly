@@ -1,0 +1,244 @@
+<header class="header">
+  <div class="top-bar py-1 hideon-mobile">
+    <!-- Top bar start -->
+    <div class="site-container">
+      <div class="row top-row-mobile">
+        <div class="col-md-4 hideon-mobile">
+          <div class="fc-phone on-mobile">
+            <img class="pe-3" src="../../../assets/images/phone.png" alt="phone">
+            <h6 class="mb-0 whtsApp"><a href="https://wa.me/+393664067958" target="_blank"></a></h6>
+          </div>
+          <div class="fc-phone">
+            <img class="pe-3" src="../../../assets/images/phone.png" alt="phone">
+            <h6 class="mb-0 whtsApp"><a href="https://wa.me/+393664067958" target="_blank">Bisogno di aiuto?</a></h6>
+          </div>
+        </div>
+        <div class="col-md-8 text-end hideon-mobile">
+          <div class="fc-map">
+            <ul class="p-0 d-flex">
+              <li>
+                <a target="_blank" rel="nofollow noopener noreferrer" class="share-facebook"
+                  href="https://www.facebook.com/bagly.it" title="Facebook">
+                  <img src="/assets/images/fb.png" alt="fb">
+                </a>
+              </li>
+              <li>
+                <a target="_blank" rel="nofollow noopener noreferrer" class="share-instagram"
+                  href="https://www.instagram.com/bagly.it/" title="Instagram">
+                  <img src="/assets/images/insta.png" alt="insta">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Top bar End -->
+  
+  <div class="main-nav" id="main-nav">
+    <!-- Main nav bar Start -->
+    <div class="site-container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler openNav-icon" type="button" (click)="openMenuNav()">
+          <span *ngIf="!status">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span *ngIf="status">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </button>
+        <a class="navbar-brand" [routerLink]="['/']"><img src="./../../../assets/images/logo.png" alt="logo"></a>
+        <ul class="navbar-nav my-2 my-lg-0 fc-cart showon-mobile">
+          <li class="nav-item">
+            <a class="nav-link" href="" (click)="openSearchBox($event);"><img
+                src="./../../../assets/images/search.png" alt="search"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mobile-cart" [routerLink]="['/cart']"><span *ngIf="itemCount"
+                class="cartTotal">{{itemCount}}</span><img src="./../../../assets/images/cart.png" alt="count"></a>
+
+          </li>
+        </ul>
+
+        <div class="collapse navbar-collapse justify-content-end" (click)="openMenuNav()" id="menu_overlay"
+          [ngClass]="status ? 'open-nav' : 'close-nav'">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0 mr-4 fc-nav mobile-menus">
+
+            <li class="nav-item active ">
+              <a routerLinkActive="active" class="nav-link" [routerLink]="['/category', 'donna']"  (click)="refressCategory()">Donna</a>
+              <ul class="subMenus">
+                <li class="nav-item active">
+                  <a routerLinkActive="active" class="nav-link" [routerLink]="['/category', 'borse']" (click)="refressCategory()">Borse</a>
+                  <ul class="submenu2">
+                    <li><a [routerLink]="['/category', 'borsemano']"  (click)="refressCategory()">Borse a mano</a></li>
+                    <li><a [routerLink]="['/category', 'borsespalla']" (click)="refressCategory()">Borse a spalla</a></li>
+                    <li><a [routerLink]="['/category', 'borsetracolla']"  (click)="refressCategory()">Borse a tracolla</a></li>
+                    <li><a [routerLink]="['/category', 'minibag']"  (click)="refressCategory()">Mini Bag & Pochette</a></li>
+                    <li><a [routerLink]="['/category', 'zaini']" (click)="refressCategory()">Zaini</a></li>
+                  </ul>
+                </li>
+      
+                <li class="nav-item active">
+                  <a routerLinkActive="active" class="nav-link" [routerLink]="['/category', 'nuovi-arrivi']" (click)="refressCategory()">Nuovi Arrivi</a>
+                </li>
+                <li class="nav-item active">
+                  <a routerLinkActive="active" class="nav-link" [routerLink]="['/category', 'piccolapelletteria']" (click)="refressCategory()">Piccola Pelletteria</a>
+                  <ul class="submenu2">
+                    <li><a [routerLink]="['/category', 'portafogli']"  (click)="refressCategory()">Portafogli</a></li>
+                    <li><a [routerLink]="['/category', 'tracolle']" (click)="refressCategory()">Tracolle</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+ 
+
+            <li class="nav-item">
+              <a routerLinkActive="active" class="nav-link" [routerLink]="['/category', 'nuovi-arrivi']" (click)="refressCategory()">Accessori</a>
+            </li>
+            <li class="nav-item">
+              <a routerLinkActive="active" class="nav-link" [routerLink]="['/shop']">Collezioni</a>
+            </li>
+
+            <li class="nav-item">
+              <a routerLinkActive="active" class="nav-link" [routerLink]="['/contact']">Contattaci</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="" (click)="openSearchBox($event);"><img
+                  src="./../../../assets/images/search.png" alt="search">Ricerca</a>
+            </li>
+            <li class="nav-item showLink-mobile" *ngIf="!userInfo.id">
+              <a class="nav-link" [routerLink]="['/login']">Accedi</a>
+            </li>
+            <li class="nav-item showLink-mobile" *ngIf="userInfo.id">
+              <a class="nav-link" [routerLink]="['/account']">Il mio Account</a>
+            </li>
+            <li class="nav-item showLink-mobile" *ngIf="userInfo.id">
+              <a class="nav-link" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+
+          <div class="mobileMenuLinks">
+            <ul class="NavMenu">
+              <li><a href="javascript:void(0)"><label for="droplist1" class="toggle">BORSE</label></a>
+                <input type="checkbox" id="droplist1">
+                <ul>
+                  <li><a [routerLink]="['/category', 'borsemano']" (click)="refressCategory()">Borse a mano</a></li>
+                  <li><a [routerLink]="['/category', 'borsespalla']"  (click)="refressCategory()">Borse a spalla</a></li>
+                  <li><a [routerLink]="['/category', 'borsetracolla']"  (click)="refressCategory()">Borse a tracolla</a></li>
+                  <li><a [routerLink]="['/category', 'minibag']"  (click)="refressCategory()">Mini Bag & Pochette</a></li>
+                  <li><a [routerLink]="['/category', 'zaini']" (click)="refressCategory()">Zaini</a></li>
+                </ul>
+              </li>
+
+              <li><a href="javascript:void(0)"><label for="droplist2" class="toggle">Piccola pelletteria</label></a>
+                <input type="checkbox" id="droplist2">
+                <ul>
+                  <li><a [routerLink]="['/category', 'portafogli']"  (click)="refressCategory()">Portafogli</a></li>
+                  <li><a [routerLink]="['/category', 'tracolle']"  (click)="refressCategory()">Tracolle</a></li>
+                </ul>
+              </li>
+              <li><a [routerLink]="['/category', 'nuovi-arrivi']" (click)="refressCategory()">Nuovi arrivi</a></li>
+              <li class="nav-item">
+                <a routerLinkActive="active" class="nav-link" [routerLink]="['/shop']">Collezioni</a>
+              </li>
+
+              <li class="nav-item">
+                <a routerLinkActive="active" class="nav-link" [routerLink]="['/contact']">Contattaci</a>
+              </li>
+              
+            </ul>
+
+
+            <ul class="accountLinks">
+              <li *ngIf="!userInfo.id">
+                <a class="nav-link" [routerLink]="['/login']"><img src="/assets/images/users.png" alt="login">Accedi</a>
+              </li>
+              <li>
+                <a class="nav-link" [routerLink]="['/account']"><img src="/assets/images/login.png" alt="login">Il mio Account</a>
+              </li>
+              <li *ngIf="userInfo.id">
+                <a class="nav-link" (click)="logout()"><img src="/assets/images/logout.png" alt="logout">Logout</a>
+              </li>
+            </ul>
+        </div>
+
+       
+
+
+
+
+
+          <ul class="navbar-nav my-2 my-lg-0 fc-cart mobile-menus">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/cart']"><span *ngIf="itemCount"
+                  class="cartTotal">{{itemCount}}</span><img src="./../../../assets/images/cart.png" alt="Carrello">Carrello </a>
+              <div class="shopping_cart" *ngIf="isCart">
+                <div class="shopping_cart_content pt-2" *ngIf="!loading">
+                  <ul class="mini-cart p-0">
+                    <li class="mini_cart_item p-3" *ngFor="let item of cartItems">
+                      <a routerLink="/product/{{ extractSlug(item.permalink) }}" (click)="refresspage()"
+                        class="mini-cart-img">
+                        <img width="324" height="324" [src]="item.images[0].thumbnail" alt="Cart">
+                      </a>
+                      <p class="d-flex flex-column mb-0"> <a routerLink="/product/{{ extractSlug(item.permalink) }}"
+                          (click)="refresspage()">{{item.name}}  <span class="mini-cart-quantity">{{item.quantity}} × <span class="amount">€
+                            {{item.prices.price}}</span></span></a>
+                          <small class="text-muted m-0" *ngIf="item?.variation?.length > 0">Colore : {{item?.variation[0]?.value}}</small></p>
+                      
+                      <a href="" (click)="removeProduct(item.key, $event)" class="remove_from_cart">×</a>
+                    </li>
+                  </ul>
+
+                  <p class="mini-cart-total mt-4">
+                    <strong>SUBTOTALE: </strong> <span class="woocommerce-Price-amount amount">€ {{getCartTotal}}</span>
+                  </p>
+                  <p class="mini-cart-buttons">
+                    <a [routerLink]="['/cart']" class=" wc-cart">Carrello</a>
+                    <a [routerLink]="['/checkout']" class="wc-checkout">Pagamento</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item login-btn" *ngIf="!userInfo.id">
+              <a class="nav-link" [routerLink]="['/login']">Accedi</a>
+            </li>
+            <li class="nav-item" *ngIf="userInfo.id">
+              <div class="dropdown">
+                <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  {{userInfo.username}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" [routerLink]="['/account']">Account</a>
+                  <a class="dropdown-item" (click)="logout()">Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div> <!-- Main nav bar End -->
+  <div id="myOverlay" class="overlay mobile-overlay" *ngIf="searchBox">
+    <div class="overlay-content"  (clickedOutside)="hidesearchBox()">
+      <input type="text" placeholder="Cerca…" name="search" (keyup)="searchProducts()" [(ngModel)]="searchText">
+      <span class="closebtn" title="Close Overlay" (click)="hidesearchBox()">×</span>
+      <ul class="list-group" *ngIf="searchProductList?.length > 0">
+        <li class="list-group-item my-1" *ngFor="let items of searchProductList"> <a
+            (click)="productLink(items)">{{items.name}}</a></li>
+      </ul>
+      <h6 *ngIf="searchProductList?.length == 0 && (searchText?.length || 0) >= 3" class="nodataFound">Nessun prodotto
+        trovato..</h6>
+    </div>
+  </div>
+
+</header>
+
+
+
+

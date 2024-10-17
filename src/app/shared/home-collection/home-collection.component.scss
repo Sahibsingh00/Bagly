@@ -1,0 +1,108 @@
+@import "../../../style/variable";
+.collections{
+    background-color: #f4f4f4;
+}
+.collection-items {
+    .inner-items {
+        .fc-items {
+            img {
+                width: 100%;
+            }
+
+            &:nth-child(1) {
+                width: 50%;
+                overflow: hidden;
+                img{
+                    transition: transform 0.2s linear;
+                }
+                &:hover img{
+                    transform: scale(1.1, 1.1);
+                }
+            }
+
+            &:nth-child(2) {
+                width: 50%;
+                background-color: #fff;
+                padding: 20px;
+            }
+
+            button{
+                background-color: #000;
+                color: #fff;
+                display: inline;
+                width: 80%;
+                padding: 10px 20px;
+            }
+        }
+
+        &:last-child {
+            flex-direction: row-reverse;
+        }
+    }
+}
+
+.modal-slides {
+    h2 {
+        left: 0;
+        transform: rotate(-90deg);
+        position: absolute;
+        font-size: 48px;
+        transform-origin: 0 0;
+        bottom: 10%;
+        color: $light;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 991px) {
+
+    .collections .modal-slides {
+        padding-left: 0 !important;
+    }
+    .collections{
+        .site-container{
+            .row{
+                display: block !important;
+                .col-lg-7{
+                    width: 100% !important;
+                }
+                .col-lg-5{
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    .fc-items {
+        .btn{
+            width: 90% !important;
+        }
+    }
+}
+@media only screen and (max-width: 640px) {
+    .collections{
+        padding-top: 50px !important;
+        padding-bottom: 50px;
+    }
+.collection-items{
+    h2{
+        font-size: 30px !important;
+    }
+    .pb-4{
+        text-align: center;
+    }
+    .d-flex{
+            display: block !important;
+        }
+    .fc-items{
+            width: 100% !important;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+    }
+    .modal-slides h2{
+        font-size: 32px !important;
+    }
+}

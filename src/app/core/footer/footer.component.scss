@@ -1,0 +1,144 @@
+.footer{
+    background-color: #e8e8e8;
+    position: relative;
+    color: #646464;;
+    border-radius: 30px;
+    .scroll-up{
+        position: absolute;
+        background-color: #FFF;
+        height: 45px;
+        width: 45px;
+        box-shadow: 1px 1px 3px 1px #ccc;
+        border-radius: 50%;
+        top: -20px;
+        right: 60px;
+        cursor: pointer;
+        img{
+            max-width: 20px;
+            position: relative;
+            top: 14px;
+            left: 13px;
+        }       
+    }
+}
+.footer-bottom{
+    background: #e8e8e8;
+} .row{
+    margin-right: 0;
+    text-align: center;
+}
+.footer-top{
+    position: relative;
+    // border-bottom: 1px solid;
+    h1{
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #000;
+        letter-spacing: 1px;
+    }
+    h6{
+        color: #717171;
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+    .footer-item-1{
+        ul{
+            li{
+                list-style-type: none;
+                display: inline-block;
+                margin: 0 7px;
+                img{
+                    width: 20px;
+                }
+            }
+        }
+}
+.footer-item-2{
+    p{
+        a{
+         color: #717171;
+                font-size: 15px;
+                display: inline-block;
+                margin-top: 10px;
+                letter-spacing: 1px;
+            }
+        }
+    }
+    .footer-item-3{
+        input{
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: transparent;
+            padding: 0 10px 0px;
+            font-size: 15px;
+            text-align: center;
+        }
+        p{
+            font-size: 10px;
+            color: #717171;
+        }
+        a{
+            color: #717171;
+            font-size: 18px;
+            font-weight: 900;
+            display: inline-block;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+    }
+    .footer-item-4{
+        p{
+            a{
+                font-size: 14px;
+                color: #717171;
+                display: inline-block;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+.invelidEmail{
+    font-size: 12px;
+    color: red;
+}
+
+.footer-desc{
+    p{
+        color: #000;
+        padding: 10px 0;
+        margin: 0;
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 767px) { 
+    .footer-top{
+        padding-bottom: 30px !important;
+        .col-md-3{
+            margin-top: 10px;
+        }
+    }
+    .footer-logo img{
+        width: 50% !important;
+    }
+    .footer-item-1 h6{
+        margin-top: 10px;
+    }
+    .footer{
+        padding-top: 30px !important;
+        margin-top: 30px;
+    }
+  }
+  @media only screen and (max-width: 991px) { 
+    .footer-logo img{
+        width: 100%;
+    }
+    .footer-bottom{
+        padding-left: 10px;
+    }
+  }
+
+  

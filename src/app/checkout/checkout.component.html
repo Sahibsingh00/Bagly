@@ -1,0 +1,242 @@
+<div class="header-section py-4 mt-3">
+  <div class="site-container">
+    <div class="row">
+      <div class="col-md-6 fc-checkout">
+        <h3 class="m-0">Pagamento</h3>
+      </div>
+      <div class="col-md-6">
+        <nav class="theme-breadcrumb">
+          <ol class="breadcrumb mb-0 py-1">
+            <li class="breadcrumb-item">
+              <a href="">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Pagamento</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="mt-5 mb-5">
+  <div class="site-container" *ngIf="!loading">
+    <form class="needs-validation p-3 " [formGroup]="billingForm" (ngSubmit)="onSubmit()">
+    
+    <div class="row">
+      <div class="col-md-8 col-lg-8">
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="mb-4">Informazioni di Contatto</h5>
+            <div class="mb-4">
+              <label for="email">Indirizzo email</label>
+              <input type="email" formControlName="email" class="form-control" id="email" (blur)="onEmailBlur()">
+              <div *ngIf="submitted && f['email'].errors" class="invalid-field">
+                <div *ngIf="f['email'].errors['required']">L'e-mail è obbligatoria</div>
+                <div *ngIf="f['email'].errors['email']">L'e-mail deve essere un indirizzo e-mail valido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="billing-form">
+          <h5 class="mb-4">Dettagli di spedizione</h5>
+          
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="first_name">Nome </label>
+                <input type="text" formControlName="first_name" class="form-control">
+                <div *ngIf="submitted && f['first_name'].errors" class="invalid-field">
+                  <div *ngIf="f['first_name'].errors['required']">Il nome è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="last_name">Cognome</label>
+                <input type="text" formControlName="last_name" class="form-control" id="last_name">
+                <div *ngIf="submitted && f['last_name'].errors" class="invalid-field">
+                  <div *ngIf="f['last_name'].errors['required']">Il cognome è obbligatorio</div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="mb-4">
+              <label for="phone">Telefono </label>
+              <input type="text" formControlName="phone" class="form-control" id="phone">
+              <div *ngIf="submitted && f['phone'].errors" class="invalid-field">
+                <div *ngIf="f['phone'].errors['required']">È richiesto il telefono</div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="address">Via e numero</label>
+                <input type="text" formControlName="address_1" class="form-control">
+                <div *ngIf="submitted && f['address_1'].errors" class="invalid-field">
+                  <div *ngIf="f['address_1'].errors['required']">L'indirizzo è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label for="address">Città</label>
+                <input type="text" formControlName="city" class="form-control">
+                <div *ngIf="submitted && f['city'].errors" class="invalid-field">
+                  <div *ngIf="f['city'].errors['required']">L'indirizzo è obbligatorio</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-4">
+                <label for="country">Paese</label>
+                <select formControlName="country" class="form-control custom-select d-block w-100"
+                  (change)="onChangeCountry()">
+                  <option value="">Scegliere...</option>
+                  <option *ngFor="let country of countryInfo; let i = index" value="{{country.code}}">
+                    {{country.name}}</option>
+                </select>
+                <div *ngIf="submitted && f['country'].errors" class="invalid-field">
+                  <div *ngIf="f['country'].errors['required']">Il Paese è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label for="state">Provincia</label>
+                <select formControlName="state" class="form-control custom-select d-block w-100">
+                  <option *ngIf="!stateInfo" value="-1">--Seleziona stato--</option>
+                  <option *ngFor="let state of stateInfo; let j = index" value="{{state.code}}">{{state.name}}</option>
+                </select>
+                <div *ngIf="submitted && f['state'].errors" class="invalid-field">
+                  <div *ngIf="f['state'].errors['required']">Lo Stato è obbligatorio</div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <label for="zip">C.A.P</label>
+                <input type="text" formControlName="postcode" class="form-control">
+                <div *ngIf="submitted && f['postcode'].errors" class="invalid-field">
+                  <div *ngIf="f['postcode'].errors['required']">Il codice postale è obbligatorio</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 mb-4" *ngIf="!userInfo && (AlreadyCutomer == false)">
+              <div class="col-md-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" (change)="createCutomer()" value=""
+                    id="flexCheckDefault">
+                  <label class="form-check-label " for="flexCheckDefault">
+                    Crea un account?
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-md-12 mt-2" *ngIf="createAccount">
+                <label class="mb-2" for="first_name">Crea password * </label>
+                <input type="password" formControlName="password" class="form-control" placeholder="password">
+                <div *ngIf="submitted && f['password'].errors" class="invalid-field">
+                  <div *ngIf="f['password'].errors['required']">Il nome è obbligatorio</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row mt-3 mb-4">
+              <div class="col-md-12">
+                <div class="">
+                  <label class="mb-2" for="first_name">Note sull'ordine (opzionale) </label>
+                  <textarea formControlName="customer_note" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+
+            
+         
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 fc-your-cart">
+        <h5 class="d-flex justify-content-between align-items-center mb-4">
+          Repilogo Ordine
+        </h5>
+        <div class="checkout-items">
+
+          <ul class="list-group mb-3" *ngIf="cartItems">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of cartItems">
+              <div class="d-flex">
+                <div class="p-figure">
+                  <img [src]="item.images[0].thumbnail" />
+                </div>
+                <div class="">
+                  <h6 class="my-0">{{item.name}}</h6>
+                  <small class="text-muted m-0" *ngIf="item?.variation?.length > 0">Colore : {{item?.variation[0]?.value}}</small>
+                </div>
+              </div>
+              <span class="text-muted customprice">€ {{item.quantity * item.totals.line_total}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between"
+              *ngIf="shippingMethods?.length > 0; else noShipingMethod">
+              <label>Spedizione : </label> <span>{{shippingMethods[0].title}}
+                {{shippingMethods[0].cost}}</span> 
+            </li>
+            <ng-template #noShipingMethod>
+              <li class="list-group-item d-flex justify-content-between"><label>Spedizione : </label> <span>
+                Spedizione Gratuita Espressa </span></li>
+            </ng-template>
+ 
+            <li class="paymentPrice list-group-item d-flex justify-content-between"
+              *ngIf="shippingMethods?.length > 0; else maxTotal">
+              <label>Totale (EUR): </label> <span id="cartTotals">€ {{ calculateTotal(getCartTotal, shippingMethods[0].cost )
+                }} </span>
+            </li>
+
+            <ng-template #maxTotal>
+              <li class="list-group-item paymentPrice d-flex justify-content-between"><label> Totale (EUR) </label> <span id="cartTotals">€
+                  {{getCartTotal}} </span></li>
+                  
+            </ng-template>
+
+           
+          </ul>
+        </div>
+
+
+        <h5 class="d-flex justify-content-between align-items-center mb-4 mt-5">
+          Metodo di pagamento
+        </h5>
+        <div class="checkout-items">
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex gap-3">
+              <label><input type="radio" formControlName="paymentMethod" value="pagamento_consegna" />
+              </label><span> Pagamento alla consegna </span>
+            </li>
+            <li class="list-group-item d-flex gap-3">
+              <label><input type="radio" formControlName="paymentMethod" value="carta_credito" />
+              </label><span> Carta di Credito </span> 
+            </li>
+
+            <!-- <li class="list-group-item d-flex gap-3">
+              <label><input type="radio" formControlName="paymentMethod" value="scalapay" />
+              </label><span> Paga in 3 rate  <img src="/assets/images/scalapay-logo-black.png" width="80"> </span> 
+            </li> -->
+
+            <li class="list-group-item d-flex gap-3">
+              <label> <input formControlName="termcondition" type="checkbox" /> </label> <span> Ho letto e accetto i <a [routerLink]="['/termini-e-condizioni']">termini e condizioni</a> di vendita. * 
+                <div *ngIf="submitted && f['termcondition'].errors" class="invalid-field">
+                  <div *ngIf="f['termcondition'].errors['required']">Questo è un campo obbligatorio.</div>
+                </div>
+              </span> 
+            </li> 
+          </ul>
+          
+            <div class="row mt-3 mb-4 pb-3">
+              <div class="col-md-12 text-center">
+                <span class="hideRequired" *ngIf="!billingForm.valid && submitted"> Tutti i campi sono obbligatori. <sup>*</sup></span>
+                <ngx-paypal [config]="payPalConfig" *ngIf="billingForm.valid && f['paymentMethod'].value == 'carta_credito'"></ngx-paypal>  
+                <button [hidden]="billingForm.valid && f['paymentMethod'].value == 'carta_credito'" type="submit" class="tfc-btn mr-1"  [innerText]="btnloading ? 'Loading...' : 'Concludi ordine'"></button>            
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+</section>
+
+

@@ -1,0 +1,23 @@
+
+
+<div class="home-slider" style="background-image: url({{theme.image}});">
+    <div class="site-container">
+        <div class="home-slide-content" >
+            <div class="home-slide-column">
+                <div class="inner-home-slide">
+                    <h1>{{theme.title}}</h1>
+                </div>
+            </div>
+            <div class="home-slide-btn">
+                <button [routerLink]="['/shop']" class="ml-4">SCOPRI ORA</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-home-collection [models]="models"></app-home-collection>
+<app-latest-product [limit]="productLimit" [productList]="productList"></app-latest-product>
+<app-model-slider [models]="models"></app-model-slider>
+<app-product-slider [product]="productList"></app-product-slider> 
+

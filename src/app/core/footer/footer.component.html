@@ -1,0 +1,81 @@
+<footer class="footer pt-3">
+    <div class="site-container">
+        <div class="scroll-up" (click)="scrollbarTop()">
+            <img src="/assets/images/uparrow.png">
+        </div>
+        <div class="footer-top pt-2 pb-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="footer-item-1">
+                                <div class="footer-logo">
+                                    <a [routerLink]="['/']"><img src="/assets/images/logo.png"></a>
+                                </div>
+                                <h6 class="pt-2">SEGUICI</h6>
+                                <ul class="p-0">
+                                    <li>
+                                        <a target="_blank" rel="nofollow noopener noreferrer" class="share-facebook"
+                                            href="https://www.facebook.com/bagly.it" title="Facebook">
+                                            <img src="/assets/images/fb.png" alt="fb">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" rel="nofollow noopener noreferrer" class="share-instagram"
+                                            href="https://www.instagram.com/bagly.it/" title="Instagram">
+                                            <img src="/assets/images/insta.png" alt="insta">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="footer-item-3">
+                                <h5>NEWSLETTER</h5>
+                                <h6>Unisciti a noi! Anticipazioni, consigli, must
+                                    avere…in esclusiva per te!</h6>
+                                <form class="mb-1">
+                                    <input type="email" 
+                                    [(ngModel)]="email" 
+                                    [ngModelOptions]="{standalone: true}" 
+                                    (keyup.enter)="onEnter()"
+                                    #emailInput="ngModel"
+                                    required 
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                    placeholder="Scrivi qui la tua E-mail">
+                                    <div *ngIf="emailInput.invalid && emailInput.value && (emailInput.dirty || emailInput.touched)" class="invelidEmail">
+                                        <div *ngIf="emailInput.errors?.['pattern']">Please enter a valid email address.</div>
+                                      </div>
+                                </form>
+                                <p class="m-0">Ho letto e accetto i termini della privacy policy</p>
+                                <p class="m-0">Desidero ricevere la newsletter di Bagly</p>
+                                <a href="#">ISCRIVITI</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="footer-item-4">
+                                <h5>AREA LEGALE</h5>
+                                <p class="m-0"><a [routerLink]="['/diritto-di-recesso']">Diritto di Recesso</a></p>
+                                <p class="m-0"><a [routerLink]="['/cookie-policy']">Gestione dei Cookie</a></p>
+                                <p class="m-0"><a [routerLink]="['/informazioni-legali']">Informazioni Legali</a></p>
+                                <p class="m-0"><a [routerLink]="['/rimborso_reso']">Politica di rimborso e reso</a></p>
+                                <p class="m-0"><a [routerLink]="['/privacy-policy']">Politica sulla riservatezza</a></p>
+                                <p class="m-0"><a [routerLink]="['/termini-e-condizioni']" >Termini e condizioni</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-desc">
+                    <p>© 2024 Bagly.it di Anna La Dogana - Via F.Ferraironi 25/t5 - 00133 - Roma (RM) - Italy
+                        - P.I./C.F.: 07210330580 Numero REA: RM-669301</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

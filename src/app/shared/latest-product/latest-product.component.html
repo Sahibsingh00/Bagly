@@ -1,0 +1,79 @@
+
+<section class="latest-product ptb-100">
+    <div class="site-container">
+        <h2 class="text-center ">Ultimi Prodotti</h2>
+        <p class="tagLign text-center mb-5">Acquista Ora</p>
+        <div class="row" *ngIf="productList.length > 0; else noLoading">
+            <div class="col-md-6 col-lg-3 mb-5" *ngFor="let items of productList.slice(0, 4) ; let i = index">
+                <div class="product-content">
+                    <div class="product-img">
+                        <a *ngIf="items.variations; else simpleproduuct" routerLink="/product/{{items.slug}}">
+                            <img [src]="getImageSrc(items)">
+                          </a>
+                          <ng-template #simpleproduuct>
+                            <a routerLink="/product/{{items.slug}}">
+                              <img [src]="items.thumbnail || 'myImgUrl'">
+                            </a>
+                          </ng-template>
+                    </div>
+                    <div class="product-detail pt-2 d-flex justify-content-between align-items-center">
+                        <div class="product-price">
+                            <div class="product-price">
+                                <span *ngIf="items.variations; else singlePrice">
+                                    <span [innerHTML]="items.price_html"></span>
+                                </span>
+                                <ng-template #singlePrice>
+                                    <div class="" *ngIf="items.sale_price; else regularPrice">
+                                        <h6 class="d-flex gap-2">
+                                            <del class="text-danger">€{{items.regular_price}}</del>
+                                            <span>€{{items.sale_price}}</span>
+                                        </h6>
+                                    </div>
+
+                                    <ng-template #regularPrice>
+                                        <h6>€ {{items.regular_price}}</h6>
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <ul class="colorVariation" *ngIf="items.variations">
+                            <li *ngFor="let option of getColorOption(items.variations)"
+                                [ngClass]="{ 'active': option === activeOption}"
+                                (click)="selectVariation(items, option)">
+                              <label [ngClass]="'color-' + normalizeOption(option)" class="color-swatch"> {{option}} </label>
+                            </li>
+                          </ul>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="product-name">
+                            <h5 class="m-0">{{ (items.name.length>25)? (items.name | slice:0:25)+'..':(items.name) }}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #noLoading>
+            <div class="text-center text-loading">
+                <p>Loading...</p>
+              </div>
+        </ng-template>
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

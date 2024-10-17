@@ -1,0 +1,83 @@
+<section class="sign-in mt-5">
+    <div class="auth-container mb-5">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="/assets/images/signup-image.jpg" alt="sing up image"></figure>
+            </div>
+            <div class="signin-form mx-5">
+                <h4 class="form-title mb-4 pt-3">Registrati</h4>
+                <form class="register-form" id="login-form" [formGroup]="signupform" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="pb-2" for="first_name">Nome</label>
+                            <input type="text" formControlName="firstName"
+                                class="form-control">
+                            <div *ngIf="submitted && f['firstName'].errors" class="invalid-field">
+                                <div *ngIf="f['firstName'].errors['required']">Il nome è obbligatorio</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="pb-2" for="first_name">Cognome</label>
+                            <input type="text" formControlName="lastName" 
+                                class="form-control">
+                            <div *ngIf="submitted && f['lastName'].errors" class="invalid-field">
+                                <div *ngIf="f['lastName'].errors['required']">Il cognome è obbligatorio</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="pb-2" for="first_name">Nome utente</label>
+                            <input type="text" formControlName="username" 
+                                class="form-control">
+                            <div *ngIf="submitted && f['username'].errors" class="invalid-field">
+                                <div *ngIf="f['username'].errors['required']">Il nome utente è obbligatorio</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="pb-2" for="first_name">Email</label>
+                            <input type="text" formControlName="email" 
+                                class="form-control">
+                            <div *ngIf="submitted && f['email'].errors" class="invalid-field">
+                                <div *ngIf="f['email'].errors['required']">L'email è obbligatoria</div>
+                                <div *ngIf="f['email'].errors['email']">L'indirizzo email deve essere valido</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <label class="pb-2" for="first_name">Password</label>
+                            <input type="text" formControlName="password" 
+                                class="form-control">
+                            <div *ngIf="submitted && f['password'].errors" class="invalid-field">
+                                <div *ngIf="f['password'].errors['required']">La password è richiesta</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 termCd">
+                            <p>Ho letto e compreso la <a [routerLink]="['/privacy-policy']">PRIVACY POLICY</a></p>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="terms" formControlName="terms" />
+                              <label class="form-check-label" for="terms">
+                                Acconsento all'analisi delle mie abitudini di acquisto al fine di ricevere comunicazioni di marketing personalizzate in base ai miei interessi <span class="text-danger">*</span>
+                              </label>
+                            </div>
+                            <div *ngIf="submitted && f['terms'].errors" class="invalid-field">
+                              <div *ngIf="f['terms'].errors['required']">Devi accettare i termini e le condizioni</div>
+                            </div>
+                          </div>
+                    </div>
+
+
+                    <div class="form-group form-button">
+                        <button type="submit" name="signin" class="tfc-btn" [innerText]="btnloading ? 'Loading...' : 'Registrati'"></button>
+                    </div>
+                <p class=" mt-3">Già hai un account <a [routerLink]="['/login']"
+                    class="signup-image-link">Accedi</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

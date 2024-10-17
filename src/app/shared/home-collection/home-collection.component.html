@@ -1,0 +1,56 @@
+<section class="collections ptb-100">
+    <div class="site-container">
+        <div class="row">
+            <div class="col-lg-7 col-md-7">
+                <div class="collection-items" *ngIf="!isLoading; else noLoading">
+                    <div class="inner-items d-flex" *ngFor="let cat of productCat.slice(0,2); let i = index">
+                        <div class="fc-items">
+                            <img *ngIf="cat.image" [src]="cat.image.src">
+                        </div>
+                        <div class="fc-items d-flex flex-column gap-1 justify-content-center">
+                            <h6 class="fw-normal" *ngIf="i == 0">I NOSTRO PRODOTTI</h6>
+                            <!-- <h5 class="sColor">{{cat.name}}</h5> -->
+                            <p *ngIf="i == 0">Esplora la nostra gamma esclusiva di borse: dalla classicità intramontabile alle tendenze contemporanee, ogni modello è pensato per soddisfare lo stile unico di ogni donna</p>
+                            <p *ngIf="i == 1">Scegli la tua compagna di stile ideale oggi stesso su Bagly e preparati a brillare in ogni occasione. Esplora la nostra collezione e lasciati ispirare dalla bellezza senza tempo delle borse in vera pelle.</p>    
+                            <button class="btn" (click)="categoryItem(cat)">Visualizza tutte le collezioni </button>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #noLoading>
+                    <div class="collection-items">
+                        <div class="inner-items d-flex">
+                            <div class="fc-items">
+                                <img src="/assets/images/square1.png">
+                            </div>
+                            <div class="fc-items d-flex flex-column gap-1 justify-content-center">
+                                <h6 class="fw-normal">I NOSTRO PRODOTTI</h6>
+                                <p>Esplora la nostra gamma esclusiva di borse: dalla classicità intramontabile alle tendenze contemporanee, ogni modello è pensato per soddisfare lo stile unico di ogni donna</p>
+                    
+                                <button class="btn">Visualizza tutte le collezioni </button>
+                            </div>
+                        </div>
+                        <div class="inner-items d-flex">
+                            <div class="fc-items">
+                                <img src="/assets/images/square2.png">
+                            </div>
+                            <div class="fc-items d-flex flex-column gap-1 justify-content-center">
+                                <p>Esplora la nostra gamma esclusiva di borse: dalla classicità intramontabile alle tendenze contemporanee, ogni modello è pensato per soddisfare lo stile unico di ogni donna</p>
+                                <button class="btn" >Visualizza tutte le collezioni </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="col-lg-5 col-md-5">
+                <div class="modal-slides ps-5 position-relative">
+                    <carousel [showIndicators]="showIndicators">
+                        <slide *ngFor="let items of models">
+                            <img [src]="items.post_image" alt="first slide" style="display: block; width: 100%;">
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

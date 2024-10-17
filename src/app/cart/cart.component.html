@@ -1,0 +1,152 @@
+<section class="pb-5 cartPage">
+    <div class="site-container mt-100 mt-5" *ngIf="noCartItem">
+        <div class="row">
+            <div class="col-md-8 fc-cart">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h5>Carrello</h5>
+                    </div>
+                    <div class="card-body cart">
+                        <div class="row d-flex justify-content-center cartHeading">
+                            <div class="col-md-4">
+                                <h6 class="heading-md">Shopping Bag</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row text-end">
+                                    <div class="col-md-3">
+                                        <h6 class="mt-2 heading-sm">Prezzo</h6>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="mt-2 heading-sm">Quantità</h6>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="mt-2 heading-sm">Prezzo totale</h6>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="isLoading" class="tfc-spinner-overlay" style="background-color: rgba(0, 0, 0, 0.5); z-index: 99999; position: absolute; opacity: 1;">
+                        </div>
+
+
+                        <div class="row d-flex justify-content-center border-top cartItemsList" *ngFor="let item of cartItems">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="book">
+                                        <a routerLink="/product/{{ extractSlug(item.permalink) }}">
+                                            <img [src]="item.images[0].thumbnail" class="book-img">
+                                        </a>
+                                    </div>
+                                    <div class="my-auto flex-column d-flex pad-left">
+                                        <h6 class="mob-text">{{item.name}}</h6>
+                                        <p class="mob-text m-0" *ngIf="item?.variation?.length > 0">Colore : {{item?.variation[0]?.value}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-auto col-md-8">
+                                <div class="row text-end align-items-center cartData">
+                                    <div class="col-md-3">
+                                        <p class="mob-text m-0"><label class="cart-mobile">Prezzo</label>€
+                                            {{item.prices.price}}</p>
+                                    </div>
+                                    <div class="col-md-4 quantity-group">
+                                        <label class="cart-mobile">Quantità</label>
+                                        <div class="input-group justify-content-end ">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-dark btn-sm" (click)="removeProduct(item.key, item.quantity)"
+                                                    id="minus-btn">-</button>
+                                            </div>
+                                            <input type="text" id="qty_input"
+                                                class="form-control text-center form-control-sm" [value]="item.quantity"
+                                                min="1" disabled>
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-dark btn-sm"
+                                                    (click)="addProduct(item.id, item.quantity)"
+                                                    id="plus-btn">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="mob-text m-0"><label class="cart-mobile">Prezzo totale</label> € {{
+                                            item.quantity * item.prices.price }} </h6>
+                                    </div>
+                                    <div class="col-md-1 text-center removeItems">
+                                        <span class="productRemove"
+                                            (click)="removeProductAll(item.key);">&#10799;</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-12 ">
+                            <div class="d-flex bg-light p-4 justify-content-between align-items-center cartItemsTotal">
+                                <div class="px-md-0 px-1" id="footer-font"> Subtotale: <span class="pl-md-4">€
+                                        {{getCartTotal}}</span> </div>
+                                <div> <a class="btn btn-nd bg-dark text-white px-lg-5 px-3"
+                                        [routerLink]="['/checkout']">Continua</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 fc-your-cart">
+                <div class="checkout-items">
+                    <h5 class="d-flex justify-content-between align-items-center mb-1">
+                        Totale Carrello
+                    </h5>
+                    <ul class="list-group list-group-flush mb-3" *ngIf="cartItems">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <label>Subtotale : </label> <span>€ {{getCartTotal}} </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between"
+                            *ngIf="shippingMethods.length > 0; else noShipingMethod">
+                            <label>Spedizione : </label> <span>{{shippingMethods[0].title}}
+                                {{shippingMethods[0].cost}}</span>
+                        </li>
+                        <ng-template #noShipingMethod>
+                            <li class="list-group-item d-flex justify-content-between"><label>Spedizione : </label> <span>
+                                Spedizione Gratuita Espressa </span></li>
+                        </ng-template>
+
+                        <li class="list-group-item d-flex justify-content-between"
+                            *ngIf="shippingMethods.length > 0; else maxTotal">
+                            <label>Totale : </label> <span>€ {{ calculateTotal(getCartTotal, shippingMethods[0].cost )
+                                }} </span>
+                        </li>
+
+                        <ng-template #maxTotal>
+                            <li class="list-group-item d-flex justify-content-between"><label> Totale : </label> <span>€
+                                    {{getCartTotal}} </span></li>
+                        </ng-template>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="site-container mt-100 mt-5" *ngIf="!noCartItem">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Cart</h3>
+                    </div>
+                    <div class="card-body cart py-5">
+                        <div class="col-sm-12 empty-cart-cls text-center"> <img style="max-width: 80px;" src="./../../../assets/images/shopping-bag.png"
+                                width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong> Il tuo carrello è vuoto.</strong></h3>
+                            <a href="#"
+                                class="btn btn-primary cart-btn-transform m-3" data-abc="true">continua a fare
+                                acquisti</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-product-slider [product]="productList"></app-product-slider>

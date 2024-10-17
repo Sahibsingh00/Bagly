@@ -1,0 +1,88 @@
+.invalid-field {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.signin-image img{
+    width: 100%;
+    height: 100%;
+}
+.auth-container{
+    overflow: hidden;
+    padding-left: 0 !important;
+    padding: 0 20px;
+    max-width: 900px;
+    background: #e8e8e8;
+    margin-bottom: 50px !important;
+    margin: 0 auto;
+    box-shadow: 0 15px 16.83px 0.17px rgb(0 0 0 / 5%);
+    -moz-box-shadow: 0 15px 16.83px .17px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 15px 16.83px 0.17px rgb(0 0 0 / 5%);
+    -o-box-shadow: 0 15px 16.83px .17px rgba(0,0,0,.05);
+    -ms-box-shadow: 0 15px 16.83px .17px rgba(0,0,0,.05);
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px;
+    .signin-content {
+        display: flex;
+        display: -webkit-flex;
+        .signin-image {
+            // margin-top: 10px;
+            figure {
+                text-align: center;
+                margin: 0;
+                line-height: 0;
+                height: 100%;
+            }
+            .signup-image-link {
+                text-decoration: underline;
+            }
+        }
+        .signup-form, .signup-image, .signin-form, .signin-image {
+            width: 50%;
+            overflow: hidden;
+        }
+        .signin-form {
+            h4 {
+                line-height: 1.66;
+                margin: 0;
+                padding: 0;
+                color: #222;
+            }
+            .agree-term{
+                margin-right: 10px;
+            }
+        }
+    }
+}
+.signup-image-link{
+    color: #000;
+    font-weight: 700;
+}
+@media only screen and (max-width: 640px) {
+    .auth-container {
+        padding: 0;
+        .signin-content{
+            display: block;
+        }
+    }
+    .auth-container .signin-content .signin-form,
+    .auth-container .signin-content .signin-image{
+        width: 100%;
+        margin: 0 !important;
+    }
+    .signin-form{
+        padding: 20px;
+        .form-title{
+            padding-top: 0 !important;
+        }
+    }
+}
+@media only screen and (max-width: 991px) {
+    .sign-in{
+        padding: 20px;
+    }
+}

@@ -1,0 +1,9 @@
+<div class="image-container" 
+     (mousemove)="zoomImage($event)" 
+     (mouseleave)="resetZoom()"
+     (touchstart)="zoomImage($event.touches[0])"
+     (touchmove)="zoomImage($event.touches[0])"
+     (touchend)="resetZoom()"
+     (touchmove)="preventDefaultTouch($event)">
+  <img [src]="imageUrl" alt="Zoomable image">
+</div>

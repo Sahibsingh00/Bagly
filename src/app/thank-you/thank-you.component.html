@@ -1,0 +1,62 @@
+<section class="thankyou mt-5 pb-5">
+    <div class="inner-desc">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="thankyou-title text-center p-4"><img src="../../../assets/images/logo.png"/></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="p-3" *ngIf="!loading">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="90"
+                                height="90" />
+                            <h4 class="pt-4">Grazie per il vostro ordine! </h4>
+                            <p> Siamo lieti di confermarti che il tuo ordine sarà evaso entro 1 giorno lavorativo. 
+                                Il pacco verrà spedito con consegna rapida e arriverà da te entro 24h/48h lavorative. 
+                                La società di spedizione ti invierà un messaggio con il tracking per monitorare la tua spedizione in tempo reale </p>
+                        </div>
+                    </div>
+
+                    <table class="table-1" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td width="65%">Conferma dell'ordine # </td>
+                            <td width="35%">#{{order.id}}</td>
+                        </tr>
+                        <tr *ngFor="let items of order?.line_items">
+                            <td width="65%"> <p class="mb-0">{{items.name}} x {{items.quantity}} </p><small *ngIf="items?.meta_data[0]?.value">Colore : {{items?.meta_data[0]?.value}}</small> </td>
+                            <td width="35%"> € {{items.price * items.quantity}}  </td>
+                        </tr>
+                        <tr>
+                            <td width="65%">Metodo di pagamento </td>
+                            <td width="35%"> {{ order.payment_method_title == 'Cash on delivery' ? 'Pagamento alla consegna' : order.payment_method_title }} </td>
+                        </tr>
+                        
+                    </table>
+
+                    <table *ngIf="order.shipping_lines?.length > 0" class="table-1" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td width="65%">Mspedizione </td>
+                            <td width="35%"> {{order.shipping_lines[0].method_title}}  €{{order.shipping_lines[0].total}}</td>
+                        </tr>
+                    </table>
+
+                    <table class="table-2 mt-2" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td width="65%"> TOTALE </td>
+                            <td width="35%">€ {{order.total}} </td>
+                        </tr>
+                    </table>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <p style="font-weight: 800;">Indirizzo di consegna</p>
+                            <p>{{order.shipping.address_1}} {{order.shipping.city}} {{order.shipping.state}} {{order.shipping.country}},  {{order.shipping.postcode}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

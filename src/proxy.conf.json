@@ -1,0 +1,8 @@
+{
+    "/wp-json": {
+      "target": "https://admin.bagly.it",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }

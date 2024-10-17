@@ -1,0 +1,52 @@
+.latest-product{
+    .fc-title{
+        h2{
+            margin: 20px 0;
+        }
+    }
+    .product-content{
+        .product-img{
+            position: relative;
+            img{
+                width: 100%;
+            }
+        }
+        .product-detail{
+            .product-name{
+                h2{
+                    font-weight: 300;
+                }
+            }
+            .product-price{
+                h3{
+                    font-size: 24px;
+                }
+            } 
+        }
+    }
+}
+
+
+
+.orderby{
+    width: 200px;
+}
+.colorVariation{
+    gap: 4px;
+    margin-bottom: 0px;
+    li{
+        label{
+            width: 20px;
+            padding: 0px;
+            height: 20px;
+        }
+    }
+}
+
+  
+  @media only screen and (max-width: 640px) {
+    .fc-product-loop{
+        flex-wrap: wrap;
+    }
+}
+  
